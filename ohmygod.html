@@ -1,0 +1,67 @@
+<head>
+  <title>Oh My God</title>
+</head>
+
+<body>
+  {{> content}}
+  {{> addText}}
+  {{> addImage}}
+  {{loginButtons}}
+  {{> history}}
+</body>
+
+<template name="content">
+  {{#with message}}
+  {{#if url}}
+  <img src="{{url}}" width="96px" height="96px"/>
+  {{/if}}
+  {{#if text}}
+  <div id="content" class="{{style}}">
+  	<p id="text" class="{{style}}">{{text}}</p>
+  </div>
+  {{/if}}
+  {{/with}}
+</template>
+
+<template name="addText">
+	<form id="addText">
+		Text:
+		<input type="text" id="message" value=""/>
+		<select id="style">
+			<option value="">Unstyled</option>
+			<option value="opengarage">Open Garage</option>
+			<option value="highcontrast">High Contrast</option>
+			<option value="inverted">Inverted High Contrast</option>
+		</select>
+		<input type="button" id="saveText" value="Save"/>
+	</form>
+</template>
+
+<template name="addImage">
+	<form id="addImage">
+		URL:
+		<input type="text" id="url" value=""/>
+		<input type="button" id="saveImage" value="Save"/>
+	</form>
+</template>
+
+<template name="history">
+	{{#each messages}}
+	 {{> message}}
+	{{/each}}
+</template>
+
+<template name="message">
+  {{#if url}}
+  	<p><img src="{{url}}" width="96px" height="96px"/></p>
+  {{/if}}
+  {{#if text}}
+  	<br/>{{text}}
+  {{/if}}
+    {{#if currentUser}}
+	<input type="button" id="delete_{{_id}}" class="delete" value="Delete" mongo_id="{{_id}}" />
+	{{/if}}
+    <input type="button" id="upvote_{{_id}}" class="upvote" value="Upvote" mongo_id="{{_id}}" />
+    {{votes}}
+    <input type="button" id="downvote_{{_id}}" class="downvote" value="Downvote" mongo_id="{{_id}}" />
+</template>

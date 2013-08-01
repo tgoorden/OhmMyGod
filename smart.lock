@@ -1,0 +1,19 @@
+{
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "master",
+    "commit": "2e78d0d110443ac6fb9471e6be1c136f15f03fd2"
+  },
+  "dependencies": {
+    "basePackages": {
+      "cron-tick": {}
+    },
+    "packages": {
+      "cron-tick": {
+        "git": "https://github.com/tmeasday/meteor-cron.git",
+        "tag": "v0.0.3",
+        "commit": "977a53e790e86b57479ef754a0560461ec9ad22c"
+      }
+    }
+  }
+}

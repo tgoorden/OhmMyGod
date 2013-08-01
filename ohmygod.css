@@ -1,0 +1,46 @@
+/* CSS declarations go here */
+body {
+	margin: 0;
+	padding: 0;
+}
+#content {
+	width: 96px;
+	height: 96px;
+	padding: 0px;
+	margin: 0px;
+}
+#addText {
+	margin-top: 100px;
+}
+#login-buttons {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+#text {
+	padding: 1px;
+	margin: 0;
+	font-size: 9px;
+	font-family: 'Helvetica';
+	-moz-hyphens:auto;
+    -ms-hyphens:auto;
+    -webkit-hyphens:auto;
+    hyphens:auto;
+    word-wrap:break-word;
+}
+.highcontrast {
+	background-color: black;
+	color: yellow;
+}
+.inverted {
+	background-color: yellow;
+	color: black;
+}
+div.opengarage {
+	background-color: #e9e9e9;
+	color: #81c0ff;
+	border: 2px solid #808080;
+}
+span.delete {
+	text-decoration: underscore;
+	color: red;
+}
