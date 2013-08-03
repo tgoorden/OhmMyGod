@@ -1,13 +1,9 @@
 <head>
-  <title>Oh My God</title>
+  <title>Ohm My God</title>
 </head>
 
 <body>
   {{> content}}
-  {{> addText}}
-  {{> addImage}}
-  {{loginButtons}}
-  {{> history}}
 </body>
 
 <template name="content">
@@ -21,6 +17,12 @@
   </div>
   {{/if}}
   {{/with}}
+  {{> addImage}}
+  <p><input type="button" id="view_history" value="Tug of war!"/></p>
+  {{#if view}}
+  {{loginButtons}}
+  {{> history}}
+  {{/if}}
 </template>
 
 <template name="addText">
@@ -39,7 +41,7 @@
 
 <template name="addImage">
 	<form id="addImage">
-		URL:
+		Add an image URL:
 		<input type="text" id="url" value=""/>
 		<input type="button" id="saveImage" value="Save"/>
 	</form>
@@ -60,6 +62,10 @@
   {{/if}}
     {{#if currentUser}}
 	<input type="button" id="delete_{{_id}}" class="delete" value="Delete" mongo_id="{{_id}}" />
+	{{/if}}
+	{{#if currentSticky}}
+	{{else}}
+	<input type="button" id="stick_{{_id}}" class="non-sticky" value="Bump!" mongo_id="{{_id}}" />
 	{{/if}}
     <input type="button" id="upvote_{{_id}}" class="upvote" value="Upvote" mongo_id="{{_id}}" />
     {{votes}}

@@ -4,10 +4,21 @@ Meteor.startup ->
   Accounts.ui.config({passwordSignupFields:'USERNAME_ONLY'})
 
 Session.setDefault('last_vote',Date.now())
+Session.setDefault('view_history',false)
 
-Template.content.message = -> Messageboard.findOne({},{sort:{votes:-1,created:-1}})
+Template.content.message = -> Messageboard.findOne({},{sort:{sticky:-1,votes:-1,created:-1}})
+
+Template.content.view = -> Session.get('view_history')
+
+Template.message.currentSticky = -> Messageboard.findOne({sticky:true})
 
 Template.history.messages = -> Messageboard.find({},{sort:{created:-1}})
+
+Template.content.events =
+  'click #view_history': (event,template) ->
+     view = Session.get('view_history')
+     Session.set('view_history',!view)
+     return
 
 Template.addText.events =
   'click #saveText': (event,template) ->
@@ -31,13 +42,13 @@ Template.message.events =
      return
   'click .non-sticky': (event,template) ->
      id = event.target.attributes['mongo_id'].value
-     message = -> Messageboard.findOne({'_id':id})
-     Messageboard.update({'_id':id},{$set:{'sticky':true}})
+     Meteor.call 'stick', id, (error) ->
+        if (error)
+          alert error
      return
   'click .sticky': (event,template) ->
      id = event.target.attributes['mongo_id'].value
-     message = -> Messageboard.findOne({'_id':id})
-     Messageboard.update({'_id':id},{$set:{'sticky':false}})
+     Meteor.call 'unstick', id
      return
   'click .upvote': (event,template) ->
      last_vote = Session.get('last_vote')
@@ -59,3 +70,4 @@ Template.message.events =
      else
      	alert 'Woah. Cool it there cowboy.'
      return
+     

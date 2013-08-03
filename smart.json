@@ -1,5 +1,6 @@
 {
   "packages": {
-    "cron-tick": {}
+    "cron-tick": {},
+    "cron": {}
   }
 }
